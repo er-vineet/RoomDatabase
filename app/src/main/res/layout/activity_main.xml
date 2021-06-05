@@ -60,13 +60,27 @@
             android:hint="@string/mobile"
             app:errorText="@{viewModel.errorMsgMobile}"/>
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@={viewModel.city}"
+            android:layout_marginBottom="10dp"
+            android:imeOptions="actionDone"
+            android:hint="@string/city"
+            app:errorText="@{viewModel.errorMsgCity}"/>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.onClickSave()}"
             android:text="@string/save" />
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

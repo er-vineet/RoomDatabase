@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [UserEntity::class], version = 1, exportSchema = true)
+@Database(entities = [UserEntity::class], version = 2, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getUserDao(): UserDao
@@ -16,6 +16,12 @@ abstract class AppDatabase : RoomDatabase() {
 
         @Volatile
         private var INSTANCE: AppDatabase? = null
+
+        private val migration_1_2: Migration = object: Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE user_table ADD COLUMN city TEXT DEFAULT 'Delhi'")
+            }
+        }
 
         fun getDatabase(context: Context) : AppDatabase {
             var instance = INSTANCE
@@ -26,6 +32,7 @@ abstract class AppDatabase : RoomDatabase() {
 
             synchronized(this) {
                 instance = Room.databaseBuilder(context, AppDatabase::class.java, "AppDatabase")
+                    .addMigrations(migration_1_2)
                     .build()
                 INSTANCE = instance
                 return instance as AppDatabase
