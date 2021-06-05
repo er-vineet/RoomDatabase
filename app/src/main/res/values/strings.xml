@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Database Application</string>
+    <string name="name">Name</string>
+    <string name="email">Email Id</string>
+    <string name="mobile">Mobile Number</string>
+    <string name="save">Save</string>
+    <string name="city">City</string>
+</resources>
