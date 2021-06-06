@@ -24,14 +24,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     var errorMsgUserName    = MutableLiveData<String?>()
     var errorMsgEmail       = MutableLiveData<String?>()
     var errorMsgMobile      = MutableLiveData<String?>()
-    var errorMsgCity        = MutableLiveData<String?>()
 
     private val database: AppDatabase = AppDatabase.getDatabase(application)
     private val repository: MainRepository = MainRepository()
     private val userDao: UserDao = database.getUserDao()
 
     val liveDataUserList: LiveData<List<UserEntity>> = repository.getAllUsers(database.getUserDao())
-    val liveDataError = MutableLiveData<String>()
     val liveDataRefreshList = MutableLiveData<String>()
 
     private fun addUser(userEntity: UserEntity) {
@@ -58,28 +56,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun validate() : Boolean {
+        errorMsgUserName.value  = null
+        errorMsgEmail.value     = null
+        errorMsgMobile.value    = null
+
         if (userName.isBlank()) {
             errorMsgUserName.value  = "Enter User Name"
-            errorMsgEmail.value     = null
-            errorMsgMobile.value    = null
-            errorMsgCity.value      = null
-            liveDataError.value     = "Enter User Name"
             return false
         }
         if (email.isBlank()) {
-            errorMsgUserName.value  = null
             errorMsgEmail.value     = "Enter Email"
-            errorMsgMobile.value    = null
-            errorMsgCity.value      = null
-            liveDataError.value     = "Enter Email"
             return false
         }
         if (mobile.isBlank()) {
-            errorMsgUserName.value  = null
-            errorMsgEmail.value     = null
             errorMsgMobile.value    = "Enter Mobile Number"
-            errorMsgCity.value      = null
-            liveDataError.value     = "Enter Mobile Number"
             return false
         }
         return true
