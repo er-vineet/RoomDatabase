@@ -10,11 +10,7 @@ import com.vineet.databaseapplication.database.UserEntity
 import com.vineet.databaseapplication.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
-/**
- * Created by Vineet Kumar on 1 Jun 2021.
- * vineet.kumar@sugaldamani.com
- * Skilrock Technologies
- */
+
 class MainActivity : AppCompatActivity() {
     
     private lateinit var mainViewModel: MainViewModel
