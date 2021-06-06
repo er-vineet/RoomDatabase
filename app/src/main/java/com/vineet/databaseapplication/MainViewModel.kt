@@ -32,7 +32,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val userDao: UserDao = database.getUserDao()
 
     val liveDataUserList: LiveData<List<UserEntity>> = repository.getAllUsers(database.getUserDao())
-    val liveDataError = MutableLiveData<String>()
     val liveDataRefreshList = MutableLiveData<String>()
 
     private fun addUser(userEntity: UserEntity) {
@@ -59,36 +58,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun validate() : Boolean {
+        errorMsgUserName.value  = null
+        errorMsgEmail.value     = null
+        errorMsgMobile.value    = null
+        errorMsgCity.value      = null
+
         if (userName.isBlank()) {
-            errorMsgUserName.value = "Enter User Name"
-            errorMsgEmail.value = null
-            errorMsgMobile.value = null
-            errorMsgCity.value = null
-            liveDataError.value = "Enter User Name"
+            errorMsgUserName.value  = "Enter User Name"
             return false
         }
         if (email.isBlank()) {
-            errorMsgUserName.value = null
-            errorMsgEmail.value = "Enter Email"
-            errorMsgMobile.value = null
-            errorMsgCity.value = null
-            liveDataError.value = "Enter Email"
+            errorMsgEmail.value     = "Enter Email"
             return false
         }
         if (mobile.isBlank()) {
-            errorMsgUserName.value = null
-            errorMsgEmail.value = null
-            errorMsgMobile.value = "Enter Mobile Number"
-            errorMsgCity.value = null
-            liveDataError.value = "Enter Mobile Number"
+            errorMsgMobile.value    = "Enter Mobile Number"
             return false
         }
         if (city.isBlank()) {
-            errorMsgUserName.value = null
-            errorMsgEmail.value = null
-            errorMsgMobile.value = null
-            errorMsgCity.value = "Enter City"
-            liveDataError.value = "Enter City"
+            errorMsgCity.value      = "Enter City"
             return false
         }
         return true

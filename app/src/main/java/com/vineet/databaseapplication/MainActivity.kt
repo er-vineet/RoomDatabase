@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = mainViewModel
 
-        mainViewModel.liveDataError.observe(this, { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() })
         mainViewModel.liveDataRefreshList.observe(this, { adapterMain.refreshData() })
         mainViewModel.liveDataUserList.observe(this, { adapterMain.setUserList(it) })
     }
